@@ -73,6 +73,11 @@ access(`./src/${args[0]}.ts`, (err) => {
                     // including diagonals --> 17013
                     break
                 case '6':
+                    const { largeTimer, timer } = require('./dist/6')
+                    inputs = data.split(',')
+                    timer(inputs)           // 362740
+                    largeTimer(inputs)      // 1644874076764
+                    break
                 case '7':
                 case '8':
                 case '9':
