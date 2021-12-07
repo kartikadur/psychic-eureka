@@ -80,7 +80,7 @@ access(`./src/${args[0]}.ts`, (err) => {
                     break
                 case '7':
                     const { align, alignSum } = require('./dist/7')
-                    inputs = data.split(',')
+                    inputs = data.split(',').map(v => +v)
                     console.log(align(inputs))      // 354129
                     console.log(alignSum(inputs))   // 98905973
                     break
