@@ -58,10 +58,10 @@ access(`./src/${args[0]}.ts`, (err) => {
                     const calls = createCalls(inputs)
                     const boards = createBoards(inputs)
                     playBingo(calls, boards)
-                    
+
                     break
                 case '5':
-                    const {createGrid, addVents, checkGrid} = require('./dist/5')
+                    const { createGrid, addVents, checkGrid } = require('./dist/5')
                     inputs = data.split(/\r\n/)
                     let grid = createGrid(1000, 1000)
                     addVents(inputs)
@@ -79,6 +79,11 @@ access(`./src/${args[0]}.ts`, (err) => {
                     largeTimer(inputs)      // 1644874076764
                     break
                 case '7':
+                    const { align, alignSum } = require('./dist/7')
+                    inputs = data.split(',')
+                    console.log(align(inputs))      // 354129
+                    console.log(alignSum(inputs))   // 98905973
+                    break
                 case '8':
                 case '9':
                 case '10':
