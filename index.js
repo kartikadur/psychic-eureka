@@ -85,6 +85,11 @@ access(`./src/${args[0]}.ts`, (err) => {
                     console.log(alignSum(inputs))   // 98905973
                     break
                 case '8':
+                    const { getDigits, countDigits } = require('./dist/8')
+                    const inputs = data.split(/\r\n/).map(v => v.split(' | '))
+                    console.log(countDigits(inputs))
+                    console.log(getDigits(inputs))      // 1043697
+                    break
                 case '9':
                 case '10':
                 case '11':
