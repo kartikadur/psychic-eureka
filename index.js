@@ -86,11 +86,18 @@ access(`./src/${args[0]}.ts`, (err) => {
                     break
                 case '8':
                     const { getDigits, countDigits } = require('./dist/8')
-                    const inputs = data.split(/\r\n/).map(v => v.split(' | '))
+                    inputs = data.split(/\r\n/).map(v => v.split(' | '))
                     console.log(countDigits(inputs))
                     console.log(getDigits(inputs))      // 1043697
                     break
                 case '9':
+                    const { valleys, basins, setupMap } = require('./dist/9')
+                    inputs = data.split(/\r\n/).map(v => v.split('').map(d => +d))
+                    // console.log(heightMap(inputs))
+                    setupMap(inputs)
+                    console.log(valleys())
+                    console.log(basins())
+                    break
                 case '10':
                 case '11':
                 case '12':
