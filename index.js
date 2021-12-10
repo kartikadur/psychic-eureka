@@ -93,12 +93,17 @@ access(`./src/${args[0]}.ts`, (err) => {
                 case '9':
                     const { valleys, basins, setupMap } = require('./dist/9')
                     inputs = data.split(/\r\n/).map(v => v.split('').map(d => +d))
-                    // console.log(heightMap(inputs))
                     setupMap(inputs)
                     console.log(valleys())
                     console.log(basins())
                     break
                 case '10':
+                    const { part01, part02 } = require('./dist/10')
+                    inputs = data.split(/\r\n/)
+                    const [total01, good] = part01(inputs)
+                    const total02 = part02(good)
+                    console.log(total01, total02)
+                    break
                 case '11':
                 case '12':
                 case '13':
