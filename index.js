@@ -105,6 +105,15 @@ access(`./src/${args[0]}.ts`, (err) => {
                     console.log(total01, total02)
                     break
                 case '11':
+                    const { setup, getFlashes, getSteps } = require('./dist/11')
+                    const inputs = data.split(/\r\n/).map(v => v.split('').map(d => +d))
+                    // console.log(inputs)
+                    setup(inputs)
+                    const flashes = getFlashes()
+                    setup(inputs) // reset inputs
+                    const steps = getSteps()
+                    console.log(flashes, steps) // 1679, 519
+                    break
                 case '12':
                 case '13':
                 case '14':
