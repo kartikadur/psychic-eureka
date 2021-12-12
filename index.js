@@ -106,7 +106,7 @@ access(`./src/${args[0]}.ts`, (err) => {
                     break
                 case '11':
                     const { setup, getFlashes, getSteps } = require('./dist/11')
-                    const inputs = data.split(/\r\n/).map(v => v.split('').map(d => +d))
+                    inputs = data.split(/\r\n/).map(v => v.split('').map(d => +d))
                     // console.log(inputs)
                     setup(inputs)
                     const flashes = getFlashes()
@@ -115,6 +115,15 @@ access(`./src/${args[0]}.ts`, (err) => {
                     console.log(flashes, steps) // 1679, 519
                     break
                 case '12':
+                    const { setupNetwork } = require('./dist/12')
+
+                    inputs = data.split(/\r\n/)
+
+                    const caves = setupNetwork(inputs)
+                    // console.log(caves.show())
+                    console.log(caves.findAllConnections('start', 'end'))
+                    console.log(caves.findAllConnections('start', 'end', true))
+                    break
                 case '13':
                 case '14':
                 case '15':
