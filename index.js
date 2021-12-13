@@ -88,7 +88,7 @@ access(`./src/${args[0]}.ts`, (err) => {
                     const { getDigits, countDigits } = require('./dist/8')
                     inputs = data.split(/\r\n/).map(v => v.split(' | '))
                     console.log(countDigits(inputs))
-                    console.log(getDigits(inputs))      // 1043697
+                    console.log(getDigits(inputs))
                     break
                 case '9':
                     const { valleys, basins, setupMap } = require('./dist/9')
@@ -112,7 +112,7 @@ access(`./src/${args[0]}.ts`, (err) => {
                     const flashes = getFlashes()
                     setup(inputs) // reset inputs
                     const steps = getSteps()
-                    console.log(flashes, steps) // 1679, 519
+                    console.log(flashes, steps)
                     break
                 case '12':
                     const { setupNetwork } = require('./dist/12')
@@ -125,6 +125,18 @@ access(`./src/${args[0]}.ts`, (err) => {
                     console.log(caves.findAllConnections('start', 'end', true))
                     break
                 case '13':
+                    const { setupGrid } = require('./dist/13')
+
+                    const [rawinputs, rawfolds] = data.split(/\r\n\r\n/)
+                    inputs = rawinputs.split(/\r\n/)
+                    folds = rawfolds.split(/\r\n/).map(f => f.split(' ')[2].split('='))
+                    const g = setupGrid(inputs)
+                    for (let i = 0; i < folds.length; i++) {
+                        const c = g.makeFold(folds[i][0], +folds[i][1])
+                        i === 0 && console.log('points after 1st fold', c)
+                    }
+                    g.show()
+                    break
                 case '14':
                 case '15':
                 case '16':
