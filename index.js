@@ -138,6 +138,17 @@ access(`./src/${args[0]}.ts`, (err) => {
                     g.show()
                     break
                 case '14':
+                    const { createRules, createPolymer, iterate, count } = require('./dist/14')
+
+                    const [basePolymer, baseRules] = data.split(/\r\n\r\n/)
+                    const rules = createRules(baseRules.split(/\r\n/))
+                    const polymer = createPolymer(basePolymer)
+                    const polymer10 = iterate(10, polymer, rules)
+                    const polymer40 = iterate(40, polymer, rules)
+                    const countOfLetters10Steps = count(polymer10)
+                    const countOfLetters40Steps = count(polymer40)
+                    console.log(countOfLetters10Steps, countOfLetters40Steps)
+                    break
                 case '15':
                 case '16':
                 case '17':
