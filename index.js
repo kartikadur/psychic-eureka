@@ -150,6 +150,26 @@ access(`./src/${args[0]}.ts`, (err) => {
                     console.log(countOfLetters10Steps, countOfLetters40Steps)
                     break
                 case '15':
+                    const { Grid, findPath } = require('./dist/15')
+                    inputs = data.split(/\r\n/)
+                    let h = inputs.length
+                    let w = inputs[0].length
+                    const g1 = Grid(h, w, (y, x) => ({
+                        riskTo: Number.MAX_SAFE_INTEGER,
+                        risk: +inputs[y][x],
+                    }))
+                    const path1 = findPath(g1, [0, 0], [h - 1, w - 1])
+                    const g2 = Grid(h * 5, w * 5, (y, x) => {
+                        let risk = (+inputs[y % h][x % w] + Math.floor(y / h) + Math.floor(x / w))
+                        if (risk > 9) risk -= 9
+                        return {
+                            riskTo: Number.MAX_SAFE_INTEGER,
+                            risk
+                        }
+                    })
+                    const path2 = findPath(g2, [0, 0], [h * 5 - 1, w * 5 - 1])
+                    console.log(path1, path2)
+                    break
                 case '16':
                 case '17':
                 case '18':
