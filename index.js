@@ -171,6 +171,13 @@ access(`./src/${args[0]}.ts`, (err) => {
                     console.log(path1, path2)
                     break
                 case '16':
+                    const { evaluate, parse, hextobin } = require('./dist/16')
+
+                    const input = hextobin(data)
+                    const versionSum = parse(input)
+                    const result = evaluate(input)
+                    console.log(versionSum, result)
+                    break
                 case '17':
                 case '18':
                 case '19':
