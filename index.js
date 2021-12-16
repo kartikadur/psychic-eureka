@@ -176,7 +176,7 @@ access(`./src/${args[0]}.ts`, (err) => {
                     const input = hextobin(data)
                     const versionSum = parse(input)
                     const result = evaluate(input)
-                    console.log(versionSum, result)
+                    console.log(versionSum, result[0])
                     break
                 case '17':
                 case '18':
