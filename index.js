@@ -23,12 +23,15 @@ access(`./src/${args[0]}.ts`, (err) => {
         }
 
         const showResults = async (fileName, addon = '') => {
-            let file = fileName
-            if (addon) {
-                file = file + `.${addon}`
-            }
-            const data = await readFileContents(`./inputs/${file}.txt`, 'utf-8')
             let inputs = []
+            let data = null
+            if (addon !== 'skip') {
+                let file = fileName
+                if (addon) {
+                    file = file + `.${addon}`
+                }
+                data = await readFileContents(`./inputs/${file}.txt`, 'utf-8')
+            }
             switch (fileName) {
                 case '1':
                     const { larger, largerWithWindow } = require('./dist/1')
@@ -179,9 +182,24 @@ access(`./src/${args[0]}.ts`, (err) => {
                     console.log(versionSum, result[0])
                     break
                 case '17':
+                    const { getResult, probe } = require('./dist/17')
+                    console.log(getResult(probe))
                 case '18':
+                    const { getMagnitude, getLargest, fromArray } = require('./dist/18')
+                    const input01 = data.split(/\r\n/).map(line => fromArray(JSON.parse(line)))
+                    const input02 = data.split(/\r\n/)
+                    const magnitude = getMagnitude(input01)
+                    const maximum = getLargest(input02)
+                    console.log(magnitude, maximum)
+                    break
                 case '19':
                 case '20':
+                    const { renderImage } = require('./dist/20')
+                    const [data01, data02] = data.split(/\r\n\r\n/)
+                    const litPixelsx2 = renderImage(data01, data02, 2)
+                    const litPixelsx50 = renderImage(data01, data02, 50)
+                    console.log(litPixelsx2, litPixelsx50)
+                    break
                 case '21':
                 case '22':
                 case '23':
