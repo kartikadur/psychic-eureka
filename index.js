@@ -201,6 +201,11 @@ access(`./src/${args[0]}.ts`, (err) => {
                     console.log(litPixelsx2, litPixelsx50)
                     break
                 case '21':
+                    const { part1, part2 } = require('./dist/21')
+                    const regularDieResult = part1()
+                    const quantumDieResult = part2({ score: 0, pos: 7 }, { score: 0, pos: 4 })
+                    console.log(regularDieResult, quantumDieResult)
+                    break
                 case '22':
                     const { startRebootSequence } = require('./dist/22')
                     const instructions = data.split(/\n/).map(line => {
