@@ -208,7 +208,7 @@ access(`./src/${args[0]}.ts`, (err) => {
                     break
                 case '22':
                     const { startRebootSequence } = require('./dist/22')
-                    const instructions = data.split(/\n/).map(line => {
+                    const instructions = data.split(/\r\n/).map(line => {
                         const [action, positions] = line.split(' ')
                         const [x1, x2, y1, y2, z1, z2] = positions.split(',').flatMap(pos => pos.slice(pos.indexOf('=') + 1).split('..').map(Number))
                         return {
@@ -228,6 +228,11 @@ access(`./src/${args[0]}.ts`, (err) => {
                 case '23':
                 case '24':
                 case '25':
+                    const { simulateCucumberHerd } = require('./dist/25')
+                    const rawList = data.split(/\r\n/).map(line => line.split(''))
+                    const step = simulateCucumberHerd(rawList)
+                    console.log(step)
+                    break
                 default:
                     console.error(`-----\n output file ${fileName} does not exist in ./dist folder \n-----`)
                     break;
