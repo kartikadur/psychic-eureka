@@ -202,6 +202,24 @@ access(`./src/${args[0]}.ts`, (err) => {
                     break
                 case '21':
                 case '22':
+                    const { startRebootSequence } = require('./dist/22')
+                    const instructions = data.split(/\n/).map(line => {
+                        const [action, positions] = line.split(' ')
+                        const [x1, x2, y1, y2, z1, z2] = positions.split(',').flatMap(pos => pos.slice(pos.indexOf('=') + 1).split('..').map(Number))
+                        return {
+                            status: action === 'on' ? 1 : -1,
+                            x1,
+                            x2,
+                            y1,
+                            y2,
+                            z1,
+                            z2,
+                        }
+                    })
+                    const smallReboot = startRebootSequence(instructions)
+                    const reboot = startRebootSequence(instructions, false)
+                    console.log(smallReboot, reboot)
+                    break
                 case '23':
                 case '24':
                 case '25':
